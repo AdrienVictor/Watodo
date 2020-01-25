@@ -13,11 +13,11 @@ export class TodoListComponent implements OnInit {
   todos: Todo[];
   todo: Todo = {
     title: "",
-    date: new Date(),
+    date: new Date().toDateString(),
     completed: false
   };
 
-  constructor(private todoService: TodoService) {}
+  constructor(public todoService: TodoService) {}
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(todos => {
