@@ -13,8 +13,9 @@ export class TodoListComponent implements OnInit {
   todos: Todo[];
   todo: Todo = {
     title: "",
-    date: new Date(),
-    completed: false
+    date: new Date().toLocaleDateString(),
+    completed: false,
+    timestamp: new Date()
   };
 
   constructor(private todoService: TodoService) {}
@@ -25,11 +26,21 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  addTodo(): void {
+  addTodo() {
     if (this.todo.title != "") {
       this.todoService.addTodo(this.todo);
+      this.todoService.getTodos().subscribe(todos => {
+        this.todos = todos;
+      });
+      this.todoService.filter = "all";
     } else return;
     this.todo.title = "";
+  }
+
+  allTodos() {
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+    });
   }
 
   filterTodo(completedFilter: boolean) {

@@ -20,11 +20,11 @@ export class TodoService {
 
   getTodos() {
     this.todos = this.db
-      .collection("Todos", ref => ref.orderBy("date", "asc"))
+      .collection("Todos", ref => ref.orderBy("timestamp", "asc"))
       .valueChanges();
 
     this.todosCollection = this.db.collection("Todos", ref =>
-      ref.orderBy("date", "asc")
+      ref.orderBy("timestamp", "asc")
     );
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions =>
@@ -38,7 +38,7 @@ export class TodoService {
     return this.todos;
   }
 
-  addTodo(todo: Todo): void {
+  addTodo(todo: Todo) {
     this.todosCollection.add(todo);
   }
 
@@ -47,17 +47,19 @@ export class TodoService {
     this.todoDoc.delete();
   }
 
-  doneEditing(todo: Todo): void {
+  doneEditing(todo: Todo) {
     if (todo.title != "") {
       this.todoDoc = this.db.doc(`Todos/${todo.id}`);
-      this.todoDoc.update(todo);
+      this.todoDoc.set(todo);
     }
   }
 
   filterTodo(completedFilter: boolean) {
     this.todos = this.db
       .collection("Todos", ref =>
-        ref.where("completed", "==", completedFilter).orderBy("date", "asc")
+        ref
+          .where("completed", "==", completedFilter)
+          .orderBy("timestamp", "asc")
       )
       .valueChanges();
 

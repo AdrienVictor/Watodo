@@ -3,5 +3,6 @@ export interface Todo {
   title?: string;
   completed?: boolean;
   editing?: boolean;
-  date?: Date;
+  date?: string;
+  timestamp?: Date;
 }

@@ -10,7 +10,7 @@
       class="todo-item-label"
       [ngClass]="{ completed: todo.completed }"
     >
-      {{ todo.title }}: {{ todo.date.toDate() | date }}
+      {{ todo.title }}: {{ todo.date }}
     </div>
     <ng-template #editingTodo>
       <input

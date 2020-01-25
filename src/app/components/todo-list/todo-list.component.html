@@ -27,7 +27,7 @@
   <div>
     <button
       [ngClass]="{ active: todoService.filter === 'all' }"
-      (click)="ngOnInit(); todoService.filter = 'all'"
+      (click)="allTodos(); todoService.filter = 'all'"
     >
       All
     </button>
