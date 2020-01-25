@@ -1,27 +1,31 @@
 <div class="todo-item" @fade>
   <div class="todo-item-left">
-    <input type="checkbox" [(ngModel)]="todo.completed" />
+    <input
+      type="checkbox"
+      (change)="todoService.doneEditing(todo)"
+      [(ngModel)]="todo.completed"
+    />
     <div
-      *ngIf="!todo.editing; else editingTodo"
+      *ngIf="!editState; else editingTodo"
       class="todo-item-label"
       [ngClass]="{ completed: todo.completed }"
     >
-      {{ todo.title }}
+      {{ todo.title }}: {{ todo.date.toDate() | date }}
     </div>
     <ng-template #editingTodo>
       <input
         type="text"
         class="todo-item-edit"
         [(ngModel)]="todo.title"
-        (blur)="todoService.doneEditing(todo)"
+        (blur)="cancelEditing($event, todo)"
         (keyup.enter)="todoService.doneEditing(todo)"
-        (keyup.esc)="todoService.cancelEditing(todo)"
+        (keyup.esc)="cancelEditing($event, todo)"
         autofocus
       />
     </ng-template>
   </div>
   <div class="remove-item">
-    <i class="far fa-edit" (click)="todoService.editTodo(todo)"></i>
-    <i class="far fa-trash-alt" (click)="todoService.deleteTodo(todo.id)"></i>
+    <i class="far fa-edit" (click)="editTodo($event, todo)"></i>
+    <i class="far fa-trash-alt" (click)="todoService.deleteTodo(todo)"></i>
   </div>
 </div>

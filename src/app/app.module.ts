@@ -3,8 +3,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { environment } from "../environments/environment";
-// import { AngularFireModule } from "@angular/fire";
-// import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestore } from "@angular/fire/firestore";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -20,10 +20,10 @@ import { TodoItemComponent } from "./components/todo-item/todo-item.component";
     AppRoutingModule,
     FormsModule,
     AutofocusModule,
-    BrowserAnimationsModule
-    // AngularFireModule.initializeApp(environment.firebase, "Watodo")
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase, "Watodo")
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -21,8 +21,23 @@ import { TodoService } from "src/app/services/todo.service";
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
+  todos: Todo[];
+  editState: boolean = false;
+  todoToEdit: Todo;
+  beforeEditCache: string = "";
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {}
+
+  editTodo(event, todo) {
+    this.beforeEditCache = todo.title;
+    this.editState = true;
+    this.todoToEdit = this.todo;
+  }
+
+  cancelEditing(event, todo): void {
+    todo.title = this.beforeEditCache;
+    this.editState = false;
+  }
 }
