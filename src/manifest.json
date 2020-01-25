@@ -1,0 +1,48 @@
+{
+  "short_name": "Watudo",
+  "name": "Watodo Todo App",
+  "start_url": "/",
+
+  "theme_color": "#f48c5b",
+  "background_color": "#ffffff",
+
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/android-chrome-192x192.png",
+      "size": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/android-chrome-512x512.png",
+      "size": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "size": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon-16x16.png",
+      "size": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon-32x32.png",
+      "size": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon.ico",
+      "size": "32x32",
+      "type": "image/ico"
+    },
+    {
+      "src": "assets/mstile-150x150.png",
+      "size": "150x150",
+      "type": "image/png"
+    }
+  ]
+}

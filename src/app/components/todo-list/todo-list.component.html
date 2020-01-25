@@ -17,7 +17,8 @@
 
 <div class="extra-container">
   <div>
-    <label><input type="checkbox" /> Check All</label>
+    <button (click)="todoService.checkAllTodos()">Check All</button>
+    <button (click)="todoService.clearCompleted()">Clear Completed</button>
   </div>
   <!-- <div>{{ todoService.remaining() }} items left</div> -->
 </div>
@@ -26,19 +27,19 @@
   <div>
     <button
       [ngClass]="{ active: todoService.filter === 'all' }"
-      (click)="ngOnInit()"
+      (click)="ngOnInit(); todoService.filter = 'all'"
     >
       All
     </button>
     <button
       [ngClass]="{ active: todoService.filter === 'active' }"
-      (click)="filterTodo(false)"
+      (click)="filterTodo(false); todoService.filter = 'active'"
     >
       Active
     </button>
     <button
       [ngClass]="{ active: todoService.filter === 'completed' }"
-      (click)="filterTodo(true)"
+      (click)="filterTodo(true); todoService.filter = 'completed'"
     >
       Completed
     </button>

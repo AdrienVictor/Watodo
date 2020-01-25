@@ -21,7 +21,7 @@ import { TodoService } from "src/app/services/todo.service";
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
-  todos: Todo[];
+  // todos: Todo[];
   editState: boolean = false;
   todoToEdit: Todo;
   beforeEditCache: string = "";

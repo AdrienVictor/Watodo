@@ -14,9 +14,6 @@ export class TodoService {
   todos: Observable<Todo[]>;
   todoDoc: AngularFirestoreDocument<Todo>;
 
-  // todoTitle: string = "";
-  // idForTodo: number = 4;
-  // beforeEditCache: string = "";
   filter: string = "all";
 
   constructor(public db: AngularFirestore) {}
@@ -38,7 +35,6 @@ export class TodoService {
         })
       )
     );
-
     return this.todos;
   }
 
@@ -66,6 +62,25 @@ export class TodoService {
       .valueChanges();
 
     return this.todos;
+  }
+
+  checkAllTodos() {
+    this.todosCollection.get().forEach(todo => {
+      return todo.docs.map(todo => {
+        return this.db.doc(`Todos/${todo.id}`).update({ completed: true });
+      });
+    });
+  }
+
+  clearCompleted() {
+    const completed = this.db.collection("Todos", ref =>
+      ref.where("completed", "==", true)
+    );
+    completed.get().forEach(todo => {
+      return todo.docs.map(todo => {
+        return this.db.doc(`Todos/${todo.id}`).delete();
+      });
+    });
   }
   // completeTodo(todo: Todo): void {
   //   this.todoDoc = this.db.doc(`Todos/${todo.id}`);
