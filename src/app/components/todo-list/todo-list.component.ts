@@ -14,6 +14,7 @@ export class TodoListComponent implements OnInit {
   todo: Todo = {
     title: "",
     date: new Date().toDateString(),
+    timestamp: new Date(),
     completed: false
   };
 

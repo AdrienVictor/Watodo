@@ -4,4 +4,5 @@ export interface Todo {
   completed?: boolean;
   editing?: boolean;
   date?: string;
+  timestamp?: Date;
 }
