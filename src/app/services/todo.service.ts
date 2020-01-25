@@ -5,7 +5,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
-import { Observable, BehaviorSubject, combineLatest } from "rxjs";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable()
@@ -19,22 +19,14 @@ export class TodoService {
   constructor(public db: AngularFirestore) {}
 
   getTodos() {
-    this.todos = this.db
-      .collection("Todos", ref => ref.orderBy("timestamp", "asc"))
-      .valueChanges();
+    // this.todos = this.db
+    //   .collection("Todos", ref => ref.orderBy("timestamp", "asc"))
+    //   .valueChanges();
 
     this.todosCollection = this.db.collection("Todos", ref =>
       ref.orderBy("timestamp", "asc")
     );
-    this.todos = this.todosCollection.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
-          const data = a.payload.doc.data() as Todo;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        })
-      )
-    );
+    this.todos = this.todosCollection.valueChanges({ idField: "id" });
     return this.todos;
   }
 

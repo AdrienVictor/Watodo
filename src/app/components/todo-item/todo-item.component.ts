@@ -26,7 +26,7 @@ export class TodoItemComponent implements OnInit {
   todoToEdit: Todo;
   beforeEditCache: string = "";
 
-  constructor(private todoService: TodoService) {}
+  constructor(public todoService: TodoService) {}
 
   ngOnInit() {}
 

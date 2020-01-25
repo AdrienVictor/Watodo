@@ -18,7 +18,7 @@ export class TodoListComponent implements OnInit {
     timestamp: new Date()
   };
 
-  constructor(private todoService: TodoService) {}
+  constructor(public todoService: TodoService) {}
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(todos => {
