@@ -6,7 +6,6 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 
 @Injectable()
 export class TodoService {
@@ -43,6 +42,7 @@ export class TodoService {
     if (todo.title != "") {
       this.todoDoc = this.db.doc(`Todos/${todo.id}`);
       this.todoDoc.set(todo);
+      console.log(todo);
     }
   }
 

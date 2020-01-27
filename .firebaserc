@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "todo-app-angular-172b7"
+  },
+  "targets": {
+    "todo-app-angular-172b7": {
+      "hosting": {
+        "Todo-App": [
+          "todo-app-angular-172b7"
+        ]
+      }
+    }
   }
 }

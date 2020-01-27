@@ -1,13 +1,11 @@
 {
-  "short_name": "Watudo",
-  "name": "Watodo Todo App",
-  "start_url": "/",
-
-  "theme_color": "#f48c5b",
-  "background_color": "#ffffff",
-
+  "name": "Todo-App",
+  "short_name": "Todo-App",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
   "display": "standalone",
-  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "assets/android-chrome-192x192.png",
@@ -33,11 +31,6 @@
       "src": "assets/favicon-32x32.png",
       "size": "32x32",
       "type": "image/png"
-    },
-    {
-      "src": "assets/favicon.ico",
-      "size": "32x32",
-      "type": "image/ico"
     },
     {
       "src": "assets/mstile-150x150.png",

@@ -19,19 +19,22 @@
   margin-bottom: 14px;
 }
 
-button {
-  font-size: 14px;
-  background-color: white;
-  appearance: none;
+// button {
+//   font-size: 14px;
+//   background-color: white;
+//   appearance: none;
 
-  &:hover {
-    background: lightgreen;
-  }
+//   &:hover {
+//     background: lightgreen;
+//   }
 
-  &:focus {
-    outline: none;
-  }
-}
+//   &:focus {
+//     outline: none;
+//   }
+// }
+// button {
+//   color: white;
+// }
 
 .active {
   background: lightgreen;

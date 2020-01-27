@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 import { Todo } from "../../interfaces/todo";
 
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
 @Component({
   selector: "todo-list",
   templateUrl: "./todo-list.component.html",
@@ -9,18 +11,31 @@ import { Todo } from "../../interfaces/todo";
   providers: [TodoService]
 })
 export class TodoListComponent implements OnInit {
+  isLinear: false;
+  formGroup1: FormGroup;
+  formGroup2: FormGroup;
   // todoTitle: string;
   todos: Todo[];
   todo: Todo = {
     title: "",
-    date: new Date().toLocaleDateString(),
+    date: new Date(),
     completed: false,
     timestamp: new Date()
   };
 
-  constructor(public todoService: TodoService) {}
+  constructor(
+    public todoService: TodoService,
+    private _formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
+    this.formGroup1 = this._formBuilder.group({
+      firstCtrl: ["", Validators.required]
+    });
+    this.formGroup2 = this._formBuilder.group({
+      secondCtrl: ["", Validators.required]
+    });
+
     this.todoService.getTodos().subscribe(todos => {
       this.todos = todos;
     });
@@ -35,6 +50,7 @@ export class TodoListComponent implements OnInit {
       this.todoService.filter = "all";
     } else return;
     this.todo.title = "";
+    console.log(this.todo);
   }
 
   allTodos() {

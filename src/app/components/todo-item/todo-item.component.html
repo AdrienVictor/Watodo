@@ -1,30 +1,56 @@
 <div class="todo-item" @fade>
-  <div class="todo-item-left">
-    <input
-      type="checkbox"
-      (change)="todoService.doneEditing(todo)"
-      [(ngModel)]="todo.completed"
-    />
-    <div
-      *ngIf="!editState; else editingTodo"
-      class="todo-item-label"
-      [ngClass]="{ completed: todo.completed }"
-    >
-      {{ todo.title }}: {{ todo.date }}
-    </div>
-    <ng-template #editingTodo>
-      <input
-        type="text"
-        class="todo-item-edit"
+  <mat-checkbox
+    *ngIf="!editState"
+    (change)="todoService.doneEditing(todo)"
+    [(ngModel)]="todo.completed"
+  ></mat-checkbox>
+
+  <div
+    *ngIf="!editState; else editingTodo"
+    class="todo-item-label"
+    [ngClass]="{ completed: todo.completed }"
+  >
+    {{ todo.title }}: {{ todo.date.seconds * 1000 | date: "dd/MM/yyyy" }}
+  </div>
+
+  <ng-template #editingTodo>
+    <div class="edit_container">
+      <mat-form-field class="edit_input">
+        <input [(ngModel)]="todo.title" matInput required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <!-- <input matInput placeholder="Favorite food" value="Sushi" /> -->
+
+        <!-- <input
+        matInput
         [(ngModel)]="todo.title"
-        (blur)="cancelEditing($event, todo)"
         (keyup.enter)="todoService.doneEditing(todo)"
         (keyup.esc)="cancelEditing($event, todo)"
         autofocus
-      />
-    </ng-template>
-  </div>
-  <div class="remove-item">
+      /> -->
+        <input
+          [(ngModel)]="todo.date"
+          [ngModelOptions]="{ standalone: true }"
+          matInput
+          [matDatepicker]="picker"
+          placeholder="change date"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="remove-item">
+      <i
+        class="fas fa-check-circle"
+        (click)="todoService.doneEditing(todo)"
+      ></i>
+      <i class="fas fa-times-circle" (click)="cancelEditing($event, todo)"></i>
+    </div>
+  </ng-template>
+
+  <div class="remove-item" *ngIf="!editState">
     <i class="far fa-edit" (click)="editTodo($event, todo)"></i>
     <i class="far fa-trash-alt" (click)="todoService.deleteTodo(todo)"></i>
   </div>
