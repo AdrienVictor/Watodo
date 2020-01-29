@@ -1,20 +1,20 @@
-<mat-toolbar class="test" color="primary">
+<mat-toolbar class="nav___actions" color="primary">
   <button mat-stroked-button (click)="openDialog()">
     New Task
   </button>
   <button mat-stroked-button (click)="todoService.checkAllTodos()">
     Check All
   </button>
-  <button mat-stroked-button (click)="todoService.clearCompleted()">
+  <button mat-stroked-button (click)="openClearDialog()">
     Clear Completed
   </button>
 </mat-toolbar>
 
-<todo-item *ngFor="let todo of todos" [todo]="todo"></todo-item>
+<div class="items___container">
+  <todo-item *ngFor="let todo of todos" [todo]="todo"></todo-item>
+</div>
 
-<!-- <div>{{ todoService.remaining() }} items left</div> -->
-
-<mat-toolbar color="primary" class="test2">
+<mat-toolbar color="primary" class="nav___filters">
   <button
     mat-raised-button
     color="primary"

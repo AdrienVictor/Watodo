@@ -42,7 +42,6 @@ export class TodoService {
     if (todo.title != "") {
       this.todoDoc = this.db.doc(`Todos/${todo.id}`);
       this.todoDoc.set(todo);
-      console.log(todo);
     }
   }
 
@@ -88,26 +87,5 @@ export class TodoService {
 
   // atLeastOneCompleted(): boolean {
   //   return this.todos.filter(todo => todo.completed).length > 0;
-  // }
-
-  // clearCompleted(): void {
-  //   this.todos = this.todos.filter(todo => !todo.completed);
-  // }
-
-  // checkAllTodos(): void {
-  //   this.todos.forEach(
-  //     todo => (todo.completed = (<HTMLInputElement>event.target).checked)
-  //   );
-  // }
-
-  // filterTodos(): Todo[] {
-  //   if (this.filter === "all") {
-  //     return this.todos;
-  //   } else if (this.filter === "active") {
-  //     return this.todos.filter(todo => !todo.completed);
-  //   } else if (this.filter === "completed") {
-  //     return this.todos.filter(todo => todo.completed);
-  //   }
-  //   return this.todos;
   // }
 }

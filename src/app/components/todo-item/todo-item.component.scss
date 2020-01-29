@@ -18,31 +18,14 @@
   }
 }
 
-// .todo-item-left {
-//   // later
-//   display: flex !important;
-//   align-items: center;
-// }
-
 .todo-item-label {
   color: white;
-  width: 250px;
   margin-left: 20px;
+
+  @media screen and (max-width: 600px) {
+    width: 250px;
+  }
 }
-
-// .todo-item-edit {
-//   font-size: 24px;
-//   color: #2c3e50;
-//   margin-left: 12px;
-//   width: 100%;
-//   padding: 10px;
-//   border: 1px solid #ccc; //override defaults
-//   font-family: "Avenir", Helvetica, Arial, sans-serif;
-
-//   &:focus {
-//     outline: none;
-//   }
-// }
 
 .completed {
   text-decoration: line-through;
@@ -51,24 +34,14 @@
   font-style: italic;
 }
 
-// CSS Transitions
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .edit_container {
   display: flex !important;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 .far {
-  color: pink;
+  color: #ffc2e2;
   margin: auto 15px;
 }
 .fas {
@@ -83,4 +56,15 @@
 
 .edit_input {
   margin-right: 20px;
+}
+
+// CSS Transitions
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }

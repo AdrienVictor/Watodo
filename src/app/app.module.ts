@@ -27,14 +27,17 @@ import {
   MatDialogModule,
   MatToolbarModule
 } from "@angular/material";
+
 import { AddTodoModalComponent } from "./components/add-todo-modal/add-todo-modal.component";
+import { ComfirmDeleteModalComponent } from "./components/comfirm-delete-modal/comfirm-delete-modal.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
-    AddTodoModalComponent
+    AddTodoModalComponent,
+    ComfirmDeleteModalComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,7 @@ import { AddTodoModalComponent } from "./components/add-todo-modal/add-todo-moda
     MatDialogModule,
     MatToolbarModule
   ],
-  entryComponents: [AddTodoModalComponent],
+  entryComponents: [AddTodoModalComponent, ComfirmDeleteModalComponent],
   providers: [TodoService, AngularFirestore],
   bootstrap: [AppComponent]
 })

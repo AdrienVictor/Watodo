@@ -1,12 +1,12 @@
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="formGroup1">
     <form [formGroup]="formGroup1">
-      <ng-template matStepLabel>What To do?</ng-template>
+      <ng-template matStepLabel>What to do?</ng-template>
       <mat-form-field>
         <input
           [(ngModel)]="todo.title"
           matInput
-          placeholder="what needs to be done"
+          placeholder="New task"
           formControlName="firstCtrl"
           required
         />
@@ -18,14 +18,14 @@
   </mat-step>
   <mat-step [stepControl]="formGroup2">
     <form [formGroup]="formGroup2">
-      <ng-template matStepLabel>When To do</ng-template>
+      <ng-template matStepLabel>When?</ng-template>
       <mat-form-field>
         <input
           [(ngModel)]="todo.date"
           [ngModelOptions]="{ standalone: true }"
           matInput
           [matDatepicker]="picker"
-          placeholder="Choose a date"
+          placeholder="Pick a date"
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

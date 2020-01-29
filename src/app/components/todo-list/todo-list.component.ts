@@ -4,6 +4,7 @@ import { Todo } from "../../interfaces/todo";
 
 import { MatDialog } from "@angular/material";
 import { AddTodoModalComponent } from "../add-todo-modal/add-todo-modal.component";
+import { ComfirmDeleteModalComponent } from "../comfirm-delete-modal/comfirm-delete-modal.component";
 
 @Component({
   selector: "todo-list",
@@ -29,6 +30,13 @@ export class TodoListComponent implements OnInit {
       console.log("The dialog was closed");
     });
   }
+  openClearDialog(): void {
+    const dialogRef = this.dialog.open(ComfirmDeleteModalComponent, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    });
+  }
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(todos => {
@@ -42,7 +50,7 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  filterTodo(completedFilter: boolean) {
+  filterTodo(completedFilter: boolean): void {
     this.todoService.filterTodo(completedFilter).subscribe(todos => {
       this.todos = todos;
     });
