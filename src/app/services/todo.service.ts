@@ -2,101 +2,86 @@ import { Injectable } from "@angular/core";
 import { Todo } from "../interfaces/todo";
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 
 @Injectable()
 export class TodoService {
-  todos: Todo[] = [
-    {
-      id: 1,
-      title: "do a todo list",
-      completed: false,
-      editing: false
-    },
-    {
-      id: 2,
-      title: "practice angular",
-      completed: false,
-      editing: false
-    }
-  ];
-  // todosCollection: AngularFirestoreCollection<Todo>;
-  // todos: Observable<Todo[]>;
+  todosCollection: AngularFirestoreCollection<Todo>;
+  todos: Observable<Todo[]>;
+  todoDoc: AngularFirestoreDocument<Todo>;
 
-  todoTitle: string = "";
-  idForTodo: number = 4;
-  beforeEditCache: string = "";
   filter: string = "all";
 
-  constructor() {}
+  constructor(public db: AngularFirestore) {}
 
-  // getTodos() {
-  //   return this.todos;
-  // }
-
-  addTodo(todoTitle: string): void {
-    if (todoTitle.trim().length === 0) {
-      return;
-    }
-    this.todos.push({
-      id: this.idForTodo,
-      title: todoTitle,
-      completed: false,
-      editing: false
-    });
-    this.todoTitle = "";
-    this.idForTodo++;
-  }
-
-  deleteTodo(id: number): void {
-    this.todos = this.todos.filter(todo => todo.id !== id);
-  }
-
-  editTodo(todo: Todo): void {
-    this.beforeEditCache = todo.title;
-    todo.editing = true;
-  }
-
-  doneEditing(todo: Todo): void {
-    if (todo.title.trim().length === 0) {
-      todo.title = this.beforeEditCache;
-    }
-    todo.editing = false;
-  }
-
-  cancelEditing(todo: Todo): void {
-    todo.title = this.beforeEditCache;
-    todo.editing = false;
-  }
-
-  remaining(): number {
-    return this.todos.filter(todo => !todo.completed).length;
-  }
-
-  atLeastOneCompleted(): boolean {
-    return this.todos.filter(todo => todo.completed).length > 0;
-  }
-
-  clearCompleted(): void {
-    this.todos = this.todos.filter(todo => !todo.completed);
-  }
-
-  checkAllTodos(): void {
-    this.todos.forEach(
-      todo => (todo.completed = (<HTMLInputElement>event.target).checked)
+  getTodos() {
+    this.todosCollection = this.db.collection("Todos", ref =>
+      ref.orderBy("date", "asc")
     );
-  }
-
-  filterTodos(): Todo[] {
-    if (this.filter === "all") {
-      return this.todos;
-    } else if (this.filter === "active") {
-      return this.todos.filter(todo => !todo.completed);
-    } else if (this.filter === "completed") {
-      return this.todos.filter(todo => todo.completed);
-    }
+    this.todos = this.todosCollection.valueChanges({ idField: "id" });
     return this.todos;
   }
+
+  addTodo(todo: Todo) {
+    this.todosCollection.add(todo);
+  }
+
+  deleteTodo(todo: Todo): void {
+    this.todoDoc = this.db.doc(`Todos/${todo.id}`);
+    this.todoDoc.delete();
+  }
+
+  doneEditing(todo: Todo) {
+    if (todo.title != "") {
+      this.todoDoc = this.db.doc(`Todos/${todo.id}`);
+      this.todoDoc.set(todo);
+    }
+  }
+
+  filterTodo(completedFilter: boolean) {
+    this.todos = this.db
+      .collection("Todos", ref =>
+        ref.where("completed", "==", completedFilter).orderBy("date", "asc")
+      )
+      .valueChanges();
+
+    return this.todos;
+  }
+
+  checkAllTodos() {
+    this.todosCollection.get().forEach(todo => {
+      return todo.docs.map(todo => {
+        return this.db.doc(`Todos/${todo.id}`).update({ completed: true });
+      });
+    });
+  }
+
+  clearCompleted() {
+    const completed = this.db.collection("Todos", ref =>
+      ref.where("completed", "==", true)
+    );
+    completed.get().forEach(todo => {
+      return todo.docs.map(todo => {
+        return this.db.doc(`Todos/${todo.id}`).delete();
+      });
+    });
+  }
+  // completeTodo(todo: Todo): void {
+  //   this.todoDoc = this.db.doc(`Todos/${todo.id}`);
+  //   this.todoDoc.update(todo);
+  // }
+
+  // remaining(): number {
+  //   // return this.todos.filter(todo => !todo.completed).length;
+  //   this.todos.forEach(todo => {
+  //     console.log(todo);
+  //   });
+  // }
+
+  // atLeastOneCompleted(): boolean {
+  //   return this.todos.filter(todo => todo.completed).length > 0;
+  // }
 }

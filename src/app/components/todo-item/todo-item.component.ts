@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Todo } from "../../interfaces/todo";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { TodoService } from "src/app/services/todo.service";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "todo-item",
@@ -20,9 +21,28 @@ import { TodoService } from "src/app/services/todo.service";
   ]
 })
 export class TodoItemComponent implements OnInit {
-  @Input() todo: Todo;
+  @Input() todo: any;
+  // todos: Todo[];
 
-  constructor(private todoService: TodoService) {}
+  editState: boolean = false;
+  todoToEdit: Todo;
+  beforeEditCache: string = "";
+  isLinear: false;
+  formGroup1: FormGroup;
+  formGroup2: FormGroup;
+
+  constructor(public todoService: TodoService) {}
 
   ngOnInit() {}
+
+  editTodo(event, todo) {
+    this.beforeEditCache = todo.title;
+    this.editState = true;
+    this.todoToEdit = this.todo;
+  }
+
+  cancelEditing(event, todo): void {
+    todo.title = this.beforeEditCache;
+    this.editState = false;
+  }
 }

@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
+import { Todo } from "../../interfaces/todo";
+
+import { MatDialog } from "@angular/material";
+import { AddTodoModalComponent } from "../add-todo-modal/add-todo-modal.component";
+import { ComfirmDeleteModalComponent } from "../comfirm-delete-modal/comfirm-delete-modal.component";
 
 @Component({
   selector: "todo-list",
@@ -8,19 +13,46 @@ import { TodoService } from "src/app/services/todo.service";
   providers: [TodoService]
 })
 export class TodoListComponent implements OnInit {
-  todoTitle: string;
+  todos: Todo[];
+  todo: Todo = {
+    title: "",
+    date: new Date(),
+    completed: false,
+    timestamp: new Date()
+  };
 
-  constructor(private todoService: TodoService) {}
+  constructor(public todoService: TodoService, public dialog: MatDialog) {}
 
-  ngOnInit() {
-    this.todoTitle = "";
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddTodoModalComponent, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    });
+  }
+  openClearDialog(): void {
+    const dialogRef = this.dialog.open(ComfirmDeleteModalComponent, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    });
   }
 
-  addTodo(): void {
-    if (this.todoTitle.trim().length === 0) {
-      return;
-    }
-    this.todoService.addTodo(this.todoTitle);
-    this.todoTitle = "";
+  ngOnInit() {
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+    });
+  }
+
+  allTodos() {
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+    });
+  }
+
+  filterTodo(completedFilter: boolean): void {
+    this.todoService.filterTodo(completedFilter).subscribe(todos => {
+      this.todos = todos;
+    });
   }
 }

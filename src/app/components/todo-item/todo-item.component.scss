@@ -1,12 +1,16 @@
 .todo-item {
-  margin-bottom: 12px;
+  padding: 10px;
+  margin: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   animation-duration: 0.3s;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 
 .remove-item {
+  display: flex;
   cursor: pointer;
   margin-left: 14px;
   &:hover {
@@ -14,35 +18,44 @@
   }
 }
 
-.todo-item-left {
-  // later
-  display: flex;
-  align-items: center;
-}
-
 .todo-item-label {
-  padding: 10px;
-  border: 1px solid white;
-  margin-left: 12px;
-}
+  color: white;
+  margin-left: 20px;
 
-.todo-item-edit {
-  font-size: 24px;
-  color: #2c3e50;
-  margin-left: 12px;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc; //override defaults
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-
-  &:focus {
-    outline: none;
+  @media screen and (max-width: 600px) {
+    width: 250px;
   }
 }
 
 .completed {
   text-decoration: line-through;
-  color: grey;
+  color: #c2185b;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.edit_container {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.far {
+  color: #ffc2e2;
+  margin: auto 15px;
+}
+.fas {
+  margin: auto 15px;
+}
+.fa-check-circle {
+  color: #01ff70;
+}
+.fa-times-circle {
+  color: #ff4136;
+}
+
+.edit_input {
+  margin-right: 20px;
 }
 
 // CSS Transitions
