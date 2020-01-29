@@ -18,10 +18,6 @@ export class TodoService {
   constructor(public db: AngularFirestore) {}
 
   getTodos() {
-    // this.todos = this.db
-    //   .collection("Todos", ref => ref.orderBy("timestamp", "asc"))
-    //   .valueChanges();
-
     this.todosCollection = this.db.collection("Todos", ref =>
       ref.orderBy("date", "asc")
     );
