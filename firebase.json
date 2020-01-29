@@ -1,16 +1,6 @@
 {
   "hosting": [
     {
-      "public": "dist/Todo-App",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
       "target": "Todo-App",
       "public": "dist/Todo-App",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],

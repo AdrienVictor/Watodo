@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestore } from "@angular/fire/firestore";
+import "firebase/firestore";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -59,7 +60,8 @@ import { ComfirmDeleteModalComponent } from "./components/comfirm-delete-modal/c
     MatNativeDateModule,
     MatListModule,
     MatDialogModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [AddTodoModalComponent, ComfirmDeleteModalComponent],
   providers: [TodoService, AngularFirestore],
