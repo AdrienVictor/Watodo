@@ -21,8 +21,9 @@ import { FormGroup } from "@angular/forms";
   ]
 })
 export class TodoItemComponent implements OnInit {
-  @Input() todo: Todo;
+  @Input() todo: any;
   // todos: Todo[];
+
   editState: boolean = false;
   todoToEdit: Todo;
   beforeEditCache: string = "";
