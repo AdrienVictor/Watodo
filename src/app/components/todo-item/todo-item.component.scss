@@ -1,12 +1,16 @@
 .todo-item {
+  padding: 10px;
   margin: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   animation-duration: 0.3s;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 
 .remove-item {
+  display: flex;
   cursor: pointer;
   margin-left: 14px;
   &:hover {
@@ -22,6 +26,8 @@
 
 .todo-item-label {
   color: white;
+  width: 250px;
+  margin-left: 20px;
 }
 
 // .todo-item-edit {
@@ -41,14 +47,14 @@
 .completed {
   text-decoration: line-through;
   color: #c2185b;
+  font-weight: 100;
+  font-style: italic;
 }
 
 // CSS Transitions
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;
-}
-input {
 }
 
 .fade-enter,
@@ -68,6 +74,13 @@ input {
 .fas {
   margin: auto 15px;
 }
+.fa-check-circle {
+  color: #01ff70;
+}
+.fa-times-circle {
+  color: #ff4136;
+}
+
 .edit_input {
   margin-right: 20px;
 }

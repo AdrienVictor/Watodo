@@ -36,7 +36,7 @@
 
 html,
 body {
-  height: 100%;
+  // height: 100%;
 }
 body {
   margin: 0;
@@ -45,7 +45,14 @@ body {
 }
 span {
   color: white !important;
+  font-size: 14px;
+  font-weight: 400;
 }
 input {
   color: white !important;
+}
+h1,
+h2 {
+  font-weight: 500 !important;
+  font-size: 18px !important;
 }

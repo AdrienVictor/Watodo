@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 import { Todo } from "../../interfaces/todo";
 
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material";
+import { AddTodoModalComponent } from "../add-todo-modal/add-todo-modal.component";
 
 @Component({
   selector: "todo-list",
@@ -11,10 +12,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   providers: [TodoService]
 })
 export class TodoListComponent implements OnInit {
-  isLinear: false;
-  formGroup1: FormGroup;
-  formGroup2: FormGroup;
-  // todoTitle: string;
   todos: Todo[];
   todo: Todo = {
     title: "",
@@ -23,34 +20,20 @@ export class TodoListComponent implements OnInit {
     timestamp: new Date()
   };
 
-  constructor(
-    public todoService: TodoService,
-    private _formBuilder: FormBuilder
-  ) {}
+  constructor(public todoService: TodoService, public dialog: MatDialog) {}
 
-  ngOnInit() {
-    this.formGroup1 = this._formBuilder.group({
-      firstCtrl: ["", Validators.required]
-    });
-    this.formGroup2 = this._formBuilder.group({
-      secondCtrl: ["", Validators.required]
-    });
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddTodoModalComponent, {});
 
-    this.todoService.getTodos().subscribe(todos => {
-      this.todos = todos;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
     });
   }
 
-  addTodo() {
-    if (this.todo.title != "") {
-      this.todoService.addTodo(this.todo);
-      this.todoService.getTodos().subscribe(todos => {
-        this.todos = todos;
-      });
-      this.todoService.filter = "all";
-    } else return;
-    this.todo.title = "";
-    console.log(this.todo);
+  ngOnInit() {
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+    });
   }
 
   allTodos() {

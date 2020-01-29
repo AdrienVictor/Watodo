@@ -14,8 +14,6 @@ import { TodoItemComponent } from "./components/todo-item/todo-item.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { TodoService } from "./services/todo.service";
 
-import { ClickOutsideModule } from "ng-click-outside";
-
 import {
   MatCheckboxModule,
   MatStepperModule,
@@ -25,11 +23,19 @@ import {
   MatIconModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatListModule
+  MatListModule,
+  MatDialogModule,
+  MatToolbarModule
 } from "@angular/material";
+import { AddTodoModalComponent } from "./components/add-todo-modal/add-todo-modal.component";
 
 @NgModule({
-  declarations: [AppComponent, TodoListComponent, TodoItemComponent],
+  declarations: [
+    AppComponent,
+    TodoListComponent,
+    TodoItemComponent,
+    AddTodoModalComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +46,6 @@ import {
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
     }),
-    ClickOutsideModule,
     MatCheckboxModule,
     MatStepperModule,
     MatButtonModule,
@@ -49,8 +54,11 @@ import {
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    MatToolbarModule
   ],
+  entryComponents: [AddTodoModalComponent],
   providers: [TodoService, AngularFirestore],
   bootstrap: [AppComponent]
 })

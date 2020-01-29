@@ -20,15 +20,6 @@
       </mat-form-field>
 
       <mat-form-field>
-        <!-- <input matInput placeholder="Favorite food" value="Sushi" /> -->
-
-        <!-- <input
-        matInput
-        [(ngModel)]="todo.title"
-        (keyup.enter)="todoService.doneEditing(todo)"
-        (keyup.esc)="cancelEditing($event, todo)"
-        autofocus
-      /> -->
         <input
           [(ngModel)]="todo.date"
           [ngModelOptions]="{ standalone: true }"

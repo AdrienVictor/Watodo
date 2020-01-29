@@ -23,7 +23,7 @@ export class TodoService {
     //   .valueChanges();
 
     this.todosCollection = this.db.collection("Todos", ref =>
-      ref.orderBy("timestamp", "asc")
+      ref.orderBy("date", "asc")
     );
     this.todos = this.todosCollection.valueChanges({ idField: "id" });
     return this.todos;
@@ -49,9 +49,7 @@ export class TodoService {
   filterTodo(completedFilter: boolean) {
     this.todos = this.db
       .collection("Todos", ref =>
-        ref
-          .where("completed", "==", completedFilter)
-          .orderBy("timestamp", "asc")
+        ref.where("completed", "==", completedFilter).orderBy("date", "asc")
       )
       .valueChanges();
 
