@@ -1,10 +1,20 @@
 <mat-toolbar class="nav___actions" color="primary">
-  <button mat-stroked-button (click)="openDialog()">
+  <button mat-stroked-button class="button___stroked" (click)="openDialog()">
     New Task
   </button>
-  <button mat-stroked-button (click)="todoService.checkAllTodos()">
-    Check All
+
+  <button mat-stroked-button [matMenuTriggerFor]="belowMenu">
+    All/None
   </button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item (click)="todoService.checkAllTodos()">
+      Check All
+    </button>
+    <button mat-menu-item (click)="todoService.uncheckAllTodos()">
+      Uncheck All
+    </button>
+  </mat-menu>
+
   <button mat-stroked-button (click)="openClearDialog()">
     Clear Completed
   </button>

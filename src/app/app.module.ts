@@ -26,7 +26,8 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatDialogModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatMenuModule
 } from "@angular/material";
 
 import { AddTodoModalComponent } from "./components/add-todo-modal/add-todo-modal.component";
@@ -61,7 +62,10 @@ import { ComfirmDeleteModalComponent } from "./components/comfirm-delete-modal/c
     MatListModule,
     MatDialogModule,
     MatToolbarModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    MatMenuModule,
+    ServiceWorkerModule.register("ngsw-worker.js", {
+      enabled: environment.production
+    })
   ],
   entryComponents: [AddTodoModalComponent, ComfirmDeleteModalComponent],
   providers: [TodoService, AngularFirestore],
