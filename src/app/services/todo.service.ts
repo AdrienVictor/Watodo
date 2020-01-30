@@ -58,6 +58,13 @@ export class TodoService {
       });
     });
   }
+  uncheckAllTodos() {
+    this.todosCollection.get().forEach(todo => {
+      return todo.docs.map(todo => {
+        return this.db.doc(`Todos/${todo.id}`).update({ completed: false });
+      });
+    });
+  }
 
   clearCompleted() {
     const completed = this.db.collection("Todos", ref =>

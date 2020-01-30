@@ -1,7 +1,7 @@
 {
-  "name": "Todo-App",
-  "short_name": "Todo-App",
-  "theme_color": "#1976d2",
+  "name": "Watodo",
+  "short_name": "Watodo",
+  "theme_color": "#7B1FA2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
